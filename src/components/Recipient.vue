@@ -1,7 +1,7 @@
 <template>
   <form name=recipient>
     <label for=address>Recipient:</label>
-    <input type=email name=address>
+    <input type=email name=address v-model=recipient @change=alertChange>
   </form>
 </template>
 
@@ -21,5 +21,15 @@ input {
 
 <script>
 export default {
+  data: () => ({
+    recipient: ''
+  }),
+  methods: {
+    alertChange(evt) {
+      evt.preventDefault()
+      evt.stopPropagation()
+      this.$emit('change', this.recipient)
+    }
+  }
 }
 </script>

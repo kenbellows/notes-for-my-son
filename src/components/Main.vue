@@ -17,6 +17,7 @@ export default {
     Note,
     Queue
   },
+  props: ['queue'],
   data: () => ({
     queue: [
       'This is day 1 with the new app',
