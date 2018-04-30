@@ -1,12 +1,20 @@
 'use strict'
 
-const baseUrl = 'localhost:3000'
+const baseUrl = 'http://localhost:3000'
 
-module.exports = {
+function graphqlQuery(query) {
+  return fetch(baseUrl + '/graphql', {
+    method: 'post',
+    headers: {'content-type': 'application/json'},
+    body: JSON.stringify({query})
+  }).then(res => res.json())
+}
+
+export default {
   getUserInfo(id) {
-    return fetch(baseUrl+'/graphql', {method: 'post', body:`
+    return graphqlQuery(`
       query {
-        getUserInfo(${id}) {
+        getUserInfo(id: ${id}) {
           username
           recipients {
             id
@@ -15,19 +23,19 @@ module.exports = {
           }
         }
       }
-    `}).then(r => r.json())
+    `)
   },
-  
+
   getRecipientInfo(id) {
-    return fetch(baseUrl+'/graphql', {method: 'post', body:`
+    return graphqlQuery(`
       query {
-        getRecipientInfo(${id}) {
+        getRecipientInfo(id: ${id}) {
           id
           name
           address
           queue
         }
       }
-    `}).then(r => r.json())
+    `)
   }
 }

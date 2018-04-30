@@ -11,25 +11,26 @@ import Recipient from './Recipient'
 import Note from './Note'
 import Queue from './Queue'
 
+import notes from '../services/notes'
+
 export default {
   components: {
     Recipient,
     Note,
     Queue
   },
+
   props: ['queue'],
-  data: () => ({
-    queue: [
-      'This is day 1 with the new app',
-      'Here\'s some test data',
-      'Foobarbazbat bofbuuqboqboom'
-    ]
-  }),
+
   methods: {
-    handleNote (newNote) {
+    handleNote(newNote) {
       console.log('Main got note:', newNote)
       this.queue.push(newNote)
     }
+  },
+
+  created() {
+    console.log('notes', notes)
   }
 }
 </script>

@@ -16,7 +16,7 @@ export default {
     note: ''
   }),
   methods: {
-    addNote (evt) {
+    addNote(evt) {
       evt.preventDefault()
       evt.stopPropagation()
       console.log('form submitted', arguments)
