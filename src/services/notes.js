@@ -10,32 +10,31 @@ function graphqlQuery(query) {
   }).then(res => res.json())
 }
 
-export default {
-  getUserInfo(id) {
-    return graphqlQuery(`
-      query {
-        getUserInfo(id: ${id}) {
-          username
-          recipients {
-            id
-            name
-            address
-          }
-        }
-      }
-    `)
-  },
-
-  getRecipientInfo(id) {
-    return graphqlQuery(`
-      query {
-        getRecipientInfo(id: ${id}) {
+export function getUserInfo(id) {
+  return graphqlQuery(`
+    query {
+      getUserInfo(id: ${id}) {
+        username
+        recipients {
           id
           name
           address
-          queue
         }
       }
-    `)
-  }
+    }
+  `).then(res => res.data.getUserInfo)
 }
+
+export function getRecipientInfo(id) {
+  return graphqlQuery(`
+    query {
+      getRecipientInfo(id: ${id}) {
+        id
+        name
+        address
+        queue
+      }
+    }
+  `).then(res => res.data.getRecipientInfo)
+}
+export default { getUserInfo, getRecipientInfo }

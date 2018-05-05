@@ -19,8 +19,6 @@ export default {
     addNote(evt) {
       evt.preventDefault()
       evt.stopPropagation()
-      console.log('form submitted', arguments)
-      console.log('me:', this)
       this.$emit('newNote', this.note)
       this.note = ''
     }

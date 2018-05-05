@@ -11,7 +11,10 @@ import Recipient from './Recipient'
 import Note from './Note'
 import Queue from './Queue'
 
-import notes from '../services/notes'
+import {getRecipientInfo} from '../services/notes'
+
+// const ME = 0
+const THEM = 0
 
 export default {
   components: {
@@ -20,7 +23,9 @@ export default {
     Queue
   },
 
-  props: ['queue'],
+  data: () => ({
+    queue: ''
+  }),
 
   methods: {
     handleNote(newNote) {
@@ -30,7 +35,10 @@ export default {
   },
 
   created() {
-    console.log('notes', notes)
+    getRecipientInfo(THEM).then(info => {
+      console.log('recipientInfo', info)
+      this.queue = info.queue
+    })
   }
 }
 </script>
